@@ -304,7 +304,7 @@ namespace AnnotationsProgram {
 	private: System::Void Button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		Stream^ myStream;
 		OpenFileDialog^ openFileDialog1 = gcnew OpenFileDialog;
-
+// This function allows the user to choose a picture they want.
 		openFileDialog1->InitialDirectory = "C:\\Users\\n0799202\\Pictures";
 		openFileDialog1->Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
 		openFileDialog1->FilterIndex = 1;
@@ -319,7 +319,7 @@ namespace AnnotationsProgram {
 				textBox1->Text = openFileDialog1->SafeFileName;
 				//pictureBox1->ImageLocation = textBox1->Text;
 				pictureBox1->ImageLocation = openFileDialog1->FileName;
-				listBox1->Items->Add(openFileDialog1->SafeFileName);
+				listBox1->Items->Add(openFileDialog1->SafeFileName); // The picture that was chosen appers.
 			}
 		}
 	
@@ -380,7 +380,7 @@ private: System::Void ListBox1_SelectedIndexChanged(System::Object^ sender, Syst
 private: System::Void Acs_Click(System::Object^ sender, System::EventArgs^ e) {
 	//The following code sorts the images in the listbox in alphabetical order.
 	//But will need to include a sorting alogrithm from term 1.
-	listBox1->Sorted = true;
+	listBox1->Sorted = true;  // If it is sorted return "true"
 }
 private: System::Void Dec_Click(System::Object^ sender, System::EventArgs^ e) {
 	
