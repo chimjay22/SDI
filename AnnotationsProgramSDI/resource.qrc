@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>images/B_2048x2048.jpg</file>
+        <file>images/flower.jpg</file>
+        <file>images/objects.jpg</file>
+        <file>images/tree.jpg</file>
+    </qresource>
+    <qresource prefix="/classes">
+        <file>classes/Apples.txt</file>
+        <file>classes/Clouds.txt</file>
+        <file>classes/Trees.txt</file>
+    </qresource>
+</RCC>
