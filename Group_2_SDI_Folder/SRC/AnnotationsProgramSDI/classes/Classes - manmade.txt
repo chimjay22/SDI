@@ -1,0 +1,7 @@
+books
+pencil
+chalk
+building
+table
+fork
+lady
