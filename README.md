@@ -4,6 +4,6 @@ Tom made this edit
 
 ## Project Description
 
-## Group
+## Group 2
 
 ## Tutor
