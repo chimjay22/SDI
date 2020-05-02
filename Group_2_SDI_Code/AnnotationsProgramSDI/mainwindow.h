@@ -18,7 +18,6 @@
 #include <QFileInfo>
 
 
-
 namespace Ui {
     class MainWindow;
 }
@@ -31,16 +30,15 @@ public:
 
 protected:
     void changeEvent(QEvent *e);
+    void mousePresssedEvent(QMouseEvent *e);
 
 
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
-    QGraphicsPixmapItem* pixmapItem;
-    QGraphicsEllipseItem *ellipse;
-    QGraphicsRectItem *rectangle;
+    QGraphicsPixmapItem* pixmapItem;    
     QGraphicsPolygonItem *polygon;
-
+    QPolygon customPolygon;
 
     QStringList listImages;
     QStringList listClasses;
@@ -57,34 +55,42 @@ private:
     QString currentClassFolder;
     QString currentClassFile;
 
+    const int SHAPE_WIDTH = 2;// shape outline
 
+    // min/max points for polygon
+    const int MINIMUM_POINTS = 3;
+    const int MAXIMUM_POINTS = 8;
 
+    bool drawingPoly = false; // flag TRUE when user drawing custom poly
 
 private slots:
 
-    void on_btnDeleteShape_clicked();
+
+    // sorting
     void on_btnSortClassDec_clicked();
     void on_btnSortDateDes_clicked();
     void on_btnSortClassAcs_clicked();
     void on_btnSortNameASC_clicked();
     void on_btnSortDateAcs_clicked();
     void on_btnSortNameDes_clicked();
+    QStringList sortList(QStringList list, bool order);
 
+    // image display
     void on_btnDispalyImg_clicked();
     void on_lwImages_itemClicked(QListWidgetItem *item);
     void on_btnSave_clicked();
 
-    void on_btnPoly_clicked();
+    //  shapes
+    void on_btnPolygon_clicked();
     void on_btnTrapezium_clicked();
     void on_btnSquare_clicked();
     void on_btnTriangle_clicked();
+    void on_btnDeleteShape_clicked();
 
     void on_btnDeleteClass_clicked();
     void on_btnDeleteImage_clicked();
     void on_btnClasses_clicked();
     void on_btnImages_clicked();
-
-    QStringList sortList(QStringList list, bool order);
 
     //Clear Lists
     void clearLwImages();

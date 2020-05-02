@@ -11,8 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     scene = new QGraphicsScene(this);
+    // initiate graphics viewport
     ui->graphicsView->setScene(scene);
-
 }
 
 MainWindow::~MainWindow()
@@ -34,6 +34,7 @@ void MainWindow::changeEvent(QEvent *e)
 
 void MainWindow::on_btnImages_clicked()
 {
+    // get directory from user
     QDir directory = QFileDialog::getExistingDirectory(this,tr("Choose a Image Directory"),QDir::homePath()); //creates a file dialog to open folder
 
     //clears list's before after new folder are imported
@@ -41,7 +42,7 @@ void MainWindow::on_btnImages_clicked()
     clearCreationDate();
 
     // only load filenames with acceptable image postfixes
-    listImages = directory.entryList(QStringList() << "*.jpg" << "*.png" << "*.jpeg", QDir::Files);
+    listImages = directory.entryList(QStringList() << "*.jpg" << "*.png" << "*.jpeg" << "*.bmp" << ".bitmap", QDir::Files);
 
     // populate listbox with acceptable files
     if (listImages.length() > 0) {
@@ -53,7 +54,6 @@ void MainWindow::on_btnImages_clicked()
             ui->lwImages->addItem(image.baseName());
             listImageFilePath.append(image.absolutePath());
             creationDate.append(image.created().toString());
-
         }
 
     } else {
@@ -121,52 +121,120 @@ void MainWindow::clearListWidgetClass(){
 void MainWindow::on_btnTriangle_clicked()
 {
     QPolygonF Triangle;
+
+    // point outline style
     QPen redPen(Qt::red);
     redPen.setWidth(2);
 
+    // set triangle points
     Triangle.append(QPointF(-50.,0));
     Triangle.append(QPointF(0,-50));
     Triangle.append(QPointF(50.,0));
-    Triangle.append(QPointF(-50.,0));
 
+
+    // add to scene
     polygon = scene->addPolygon(Triangle,redPen);
     polygon->setFlag(QGraphicsItem::ItemIsMovable);
-
+    polygon->setFlag(QGraphicsItem::ItemIsSelectable);
 }
+
+
 void MainWindow::on_btnSquare_clicked()
-{
+{    
+    QPolygonF Rectangle;
+
+    // pen outline style
     QPen redPen(Qt::red);
     redPen.setWidth(2);
-    rectangle = scene->addRect(-100,100,50,50,redPen);
-    rectangle->setFlag(QGraphicsItem::ItemIsMovable);
+
+    // Add default points for the rectangle
+    Rectangle.append(QPointF(0,0));
+    Rectangle.append(QPointF(50,0));
+    Rectangle.append(QPointF(50,50));
+    Rectangle.append(QPointF(0,50));
+
+    // add to scene
+    polygon = scene->addPolygon(Rectangle,redPen);
+    polygon->setFlag(QGraphicsItem::ItemIsMovable);
+    polygon->setFlag(QGraphicsItem::ItemIsSelectable);
 }
+
 void MainWindow::on_btnTrapezium_clicked()
 {
     QPolygonF Trapezium;
+
+    // outline style
     QPen redPen(Qt::red);
     redPen.setWidth(2);
 
-
+    // append points to polygon
     Trapezium.append(QPointF(10.,0));
     Trapezium.append(QPointF(50,0));
     Trapezium.append(QPointF(70,50));
     Trapezium.append(QPointF(-10,50));
-    Trapezium.append(QPointF(10.,0));
 
-
-    polygon = scene->addPolygon(Trapezium,redPen);
+    // add to scene
+    polygon = scene->addPolygon(Trapezium, redPen);
     polygon->setFlag(QGraphicsItem::ItemIsMovable);
+    polygon->setFlag(QGraphicsItem::ItemIsSelectable);
+
 }
-void MainWindow::on_btnPoly_clicked()
+
+// CUSTOM SHAPES
+void MainWindow::on_btnPolygon_clicked()
 {
+    // start drawing new polygon, set flag to true
+    if (!this->drawingPoly)
+    {
+        this->drawingPoly = true;
+        //delete this->customPolygon; // release data on starting new poly
+        this->customPolygon.clear();
+    }
+    else
+    {
+        this->drawingPoly = false;
+        // only save polygons that have minimum number of points
+        if (this->customPolygon.count() > MINIMUM_POINTS)
+        {
+            QPen redPen(Qt::red);
+            this->polygon = scene->addPolygon(customPolygon, redPen);
+            polygon->setFlag(QGraphicsItem::ItemIsMovable);
+            polygon->setFlag(QGraphicsItem::ItemIsSelectable);
+        }
+        else // don't save polygons under 3 pts
+        {
+            //delete this->customPolygon;
+            QMessageBox::information(this, "ERROR", "Polygon below 3 points, please try again");
+        }
 
+    }
 
 }
 
+void MainWindow::mousePresssedEvent(QMouseEvent *e)
+{
+    if(this->drawingPoly && this->customPolygon.count() < MAXIMUM_POINTS)
+    {
+        customPolygon.append(e->pos());
+    }
+
+}
+
+
+// DELETING SHAPES
 void MainWindow::on_btnDeleteShape_clicked()
 {
+    // do nothing if user hasn't selected a shape!
+    if (scene->selectedItems().isEmpty()) return;
+    foreach (QGraphicsItem* item, scene->selectedItems())
+    {
+        // remove selected item from scene. release memory.
+        scene->removeItem(item);
+        delete item;
+    }
 }
 
+// SORT LIST
 QStringList MainWindow::sortList(QStringList list, bool order){
     int size = list.count();
 
@@ -246,7 +314,6 @@ void MainWindow::on_btnSortNameDes_clicked()
 }
 
 //SORT IMAGE DATES
-
 void MainWindow::on_btnSortDateAcs_clicked()
 {
     clearLwImages();
@@ -335,6 +402,7 @@ void MainWindow::on_btnSave_clicked()
 {
 
 }
+
 
 
 
