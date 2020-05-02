@@ -4,8 +4,10 @@
 TARGET = AnnotationsProgramSDI
 TEMPLATE = app
 SOURCES += main.cpp \
+    graphicscustom.cpp \
     mainwindow.cpp
-HEADERS += mainwindow.h
+HEADERS += mainwindow.h \
+    graphicscustom.h
 FORMS += mainwindow.ui
 RESOURCES += 
 QT += widgets

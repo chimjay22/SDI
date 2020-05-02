@@ -11,7 +11,6 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
@@ -37,7 +36,6 @@ public:
     QPushButton *btnImages;
     QPushButton *btnDeleteImage;
     QPushButton *btnDispalyImg;
-    QGraphicsView *graphicsView;
     QPushButton *btnPolygon;
     QPushButton *btnSquare;
     QPushButton *btnTriangle;
@@ -100,12 +98,6 @@ public:
         btnDispalyImg = new QPushButton(centralWidget);
         btnDispalyImg->setObjectName(QString::fromUtf8("btnDispalyImg"));
         btnDispalyImg->setGeometry(QRect(260, 60, 101, 23));
-        graphicsView = new QGraphicsView(centralWidget);
-        graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
-        graphicsView->setGeometry(QRect(400, 30, 641, 461));
-        graphicsView->setFrameShape(QFrame::Panel);
-        graphicsView->setFrameShadow(QFrame::Plain);
-        graphicsView->setLineWidth(1);
         btnPolygon = new QPushButton(centralWidget);
         btnPolygon->setObjectName(QString::fromUtf8("btnPolygon"));
         btnPolygon->setGeometry(QRect(1090, 340, 91, 71));
@@ -177,7 +169,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1224, 20));
+        menuBar->setGeometry(QRect(0, 0, 1224, 21));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));

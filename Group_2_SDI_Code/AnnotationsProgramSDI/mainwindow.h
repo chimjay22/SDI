@@ -17,6 +17,8 @@
 #include <QMutableLinkedListIterator>
 #include <QFileInfo>
 
+#include "graphicscustom.h"
+
 
 namespace Ui {
     class MainWindow;
@@ -30,7 +32,7 @@ public:
 
 protected:
     void changeEvent(QEvent *e);
-    void mousePresssedEvent(QMouseEvent *e);
+
 
 
 private:
@@ -55,16 +57,20 @@ private:
     QString currentClassFolder;
     QString currentClassFile;
 
+    GraphicsCustom * GC;
+
     const int SHAPE_WIDTH = 2;// shape outline
 
     // min/max points for polygon
     const int MINIMUM_POINTS = 3;
     const int MAXIMUM_POINTS = 8;
 
-    bool drawingPoly = false; // flag TRUE when user drawing custom poly
 
+    bool drawingPoly = false; // flag TRUE when user drawing custom poly
+    QStringList sortList(QStringList list, bool order);
 private slots:
 
+    //void on_GraphicsCustom_clicked(QMouseEvent *e);
 
     // sorting
     void on_btnSortClassDec_clicked();
@@ -73,7 +79,7 @@ private slots:
     void on_btnSortNameASC_clicked();
     void on_btnSortDateAcs_clicked();
     void on_btnSortNameDes_clicked();
-    QStringList sortList(QStringList list, bool order);
+
 
     // image display
     void on_btnDispalyImg_clicked();

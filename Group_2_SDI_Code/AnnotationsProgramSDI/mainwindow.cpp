@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QFileInfo>
-
+#include <QGridLayout>
 
 using namespace std;
 
@@ -9,10 +9,13 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
-    scene = new QGraphicsScene(this);
-    // initiate graphics viewport
-    ui->graphicsView->setScene(scene);
+    ui->setupUi(this);    
+
+    // initiate ~custom~ graphics viewport
+    CustomGraphicsView = new GraphicsCustom();
+    scene = CustomGraphicsView->scene;
+    // Apply it to the window layout
+    this->layout()->addWidget(CustomGraphicsView);
 }
 
 MainWindow::~MainWindow()
@@ -127,15 +130,14 @@ void MainWindow::on_btnTriangle_clicked()
     redPen.setWidth(2);
 
     // set triangle points
-    Triangle.append(QPointF(-50.,0));
-    Triangle.append(QPointF(0,-50));
-    Triangle.append(QPointF(50.,0));
-
+    Triangle.append(QPointF(50,100));
+    Triangle.append(QPointF(75,50));
+    Triangle.append(QPointF(100,100));
 
     // add to scene
     polygon = scene->addPolygon(Triangle,redPen);
     polygon->setFlag(QGraphicsItem::ItemIsMovable);
-    polygon->setFlag(QGraphicsItem::ItemIsSelectable);
+    polygon->setFlag(QGraphicsItem::ItemIsSelectable,true);
 }
 
 
@@ -184,38 +186,16 @@ void MainWindow::on_btnTrapezium_clicked()
 void MainWindow::on_btnPolygon_clicked()
 {
     // start drawing new polygon, set flag to true
-    if (!this->drawingPoly)
+    if (!CustomGraphicsView->drawingPoly)
     {
-        this->drawingPoly = true;
-        //delete this->customPolygon; // release data on starting new poly
-        this->customPolygon.clear();
+        // set drawing flag
+        CustomGraphicsView->drawingPoly = true;
+        // release data on starting new poly
+        CustomGraphicsView->poly.clear();
     }
     else
     {
-        this->drawingPoly = false;
-        // only save polygons that have minimum number of points
-        if (this->customPolygon.count() > MINIMUM_POINTS)
-        {
-            QPen redPen(Qt::red);
-            this->polygon = scene->addPolygon(customPolygon, redPen);
-            polygon->setFlag(QGraphicsItem::ItemIsMovable);
-            polygon->setFlag(QGraphicsItem::ItemIsSelectable);
-        }
-        else // don't save polygons under 3 pts
-        {
-            //delete this->customPolygon;
-            QMessageBox::information(this, "ERROR", "Polygon below 3 points, please try again");
-        }
-
-    }
-
-}
-
-void MainWindow::mousePresssedEvent(QMouseEvent *e)
-{
-    if(this->drawingPoly && this->customPolygon.count() < MAXIMUM_POINTS)
-    {
-        customPolygon.append(e->pos());
+        CustomGraphicsView->FinaliseShape();
     }
 
 }
@@ -403,6 +383,7 @@ void MainWindow::on_btnSave_clicked()
 
 }
 
+//void MainWindow::on_GraphicsCustom_clicked(QMouseEvent *e){printf("clicked emitted");}
 
 
 
