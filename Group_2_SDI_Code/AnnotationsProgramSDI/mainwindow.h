@@ -57,7 +57,7 @@ private:
     QString currentClassFolder;
     QString currentClassFile;
 
-    GraphicsCustom * GC;
+    GraphicsCustom * CustomGraphicsView;
 
     const int SHAPE_WIDTH = 2;// shape outline
 
