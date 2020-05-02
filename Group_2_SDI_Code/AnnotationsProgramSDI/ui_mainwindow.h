@@ -10,21 +10,21 @@
 #ifndef UI_MAINWINDOW_H
 #define UI_MAINWINDOW_H
 
-#include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QGraphicsView>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QListWidget>
-#include <QtGui/QMainWindow>
-#include <QtGui/QMenuBar>
-#include <QtGui/QPushButton>
-#include <QtGui/QStatusBar>
-#include <QtGui/QToolBar>
-#include <QtGui/QToolButton>
-#include <QtGui/QWidget>
+#include <QVariant>
+#include <QAction>
+#include <QApplication>
+#include <QButtonGroup>
+#include <QGraphicsView>
+#include <QHeaderView>
+#include <QLabel>
+#include <QListWidget>
+#include <QMainWindow>
+#include <QMenuBar>
+#include <QPushButton>
+#include <QStatusBar>
+#include <QToolBar>
+#include <QToolButton>
+#include <QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -198,34 +198,35 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0, QApplication::UnicodeUTF8));
-        btnDeleteClass->setText(QApplication::translate("MainWindow", "Delete", 0, QApplication::UnicodeUTF8));
-        btnClasses->setText(QApplication::translate("MainWindow", "Classes...", 0, QApplication::UnicodeUTF8));
-        lClasses->setText(QApplication::translate("MainWindow", "Classes:", 0, QApplication::UnicodeUTF8));
-        btnSave->setText(QApplication::translate("MainWindow", "Save Annotations", 0, QApplication::UnicodeUTF8));
-        btnImages->setText(QApplication::translate("MainWindow", "Images...", 0, QApplication::UnicodeUTF8));
-        btnDeleteImage->setText(QApplication::translate("MainWindow", "Delete", 0, QApplication::UnicodeUTF8));
-        btnDispalyImg->setText(QApplication::translate("MainWindow", "Display", 0, QApplication::UnicodeUTF8));
-        btnPolygon->setText(QApplication::translate("MainWindow", "Polygon", 0, QApplication::UnicodeUTF8));
-        btnSquare->setText(QApplication::translate("MainWindow", "Square", 0, QApplication::UnicodeUTF8));
-        btnTriangle->setText(QApplication::translate("MainWindow", "Triangle", 0, QApplication::UnicodeUTF8));
-        btnTrapezium->setText(QApplication::translate("MainWindow", "Trapezium ", 0, QApplication::UnicodeUTF8));
-        btnSortNameASC->setText(QApplication::translate("MainWindow", "Name Ascending", 0, QApplication::UnicodeUTF8));
-        tvFileName_3->setText(QApplication::translate("MainWindow", "Images:", 0, QApplication::UnicodeUTF8));
-        btnSortNameDes->setText(QApplication::translate("MainWindow", " Name Decending", 0, QApplication::UnicodeUTF8));
-        btnSortDateAcs->setText(QApplication::translate("MainWindow", " Date Ascending", 0, QApplication::UnicodeUTF8));
-        btnSortDateDes->setText(QApplication::translate("MainWindow", "Date Decending", 0, QApplication::UnicodeUTF8));
-        btnSortClassAcs->setText(QApplication::translate("MainWindow", "Name Ascendng ", 0, QApplication::UnicodeUTF8));
-        btnSortClassDec->setText(QApplication::translate("MainWindow", "Name Decending ", 0, QApplication::UnicodeUTF8));
-        lSortClasses->setText(QApplication::translate("MainWindow", "Sort:", 0, QApplication::UnicodeUTF8));
-        lSortImages->setText(QApplication::translate("MainWindow", "Sort:", 0, QApplication::UnicodeUTF8));
-        lShapes->setText(QApplication::translate("MainWindow", "Shapes:", 0, QApplication::UnicodeUTF8));
-        btnDeleteShape->setText(QApplication::translate("MainWindow", "Delete Shape", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("MainWindow", "1. Import the desired folder of images with the Images Button. ", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("MainWindow", "2. Display the desired image by clicking on its name and then clicking the Dispay Button.  ", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("MainWindow", "3. Import the desired folder of classes with the Classses button. Once imported, you can sort the files using availibe buttons.", 0, QApplication::UnicodeUTF8));
-        label_4->setText(QApplication::translate("MainWindow", "4. Using the shape button draw the shapes on top of the images. Click and drag the centre of the shape to move.", 0, QApplication::UnicodeUTF8));
-        label_5->setText(QApplication::translate("MainWindow", "5.Click the save button to create a new file. ", 0, QApplication::UnicodeUTF8));
+
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
+        btnDeleteClass->setText(QApplication::translate("MainWindow", "Delete", 0));
+        btnClasses->setText(QApplication::translate("MainWindow", "Classes...", 0));
+        lClasses->setText(QApplication::translate("MainWindow", "Classes:", 0));
+        btnSave->setText(QApplication::translate("MainWindow", "Save Annotations", 0));
+        btnImages->setText(QApplication::translate("MainWindow", "Images...", 0));
+        btnDeleteImage->setText(QApplication::translate("MainWindow", "Delete", 0));
+        btnDispalyImg->setText(QApplication::translate("MainWindow", "Display", 0));
+        btnPolygon->setText(QApplication::translate("MainWindow", "Polygon", 0));
+        btnSquare->setText(QApplication::translate("MainWindow", "Square", 0));
+        btnTriangle->setText(QApplication::translate("MainWindow", "Triangle", 0));
+        btnTrapezium->setText(QApplication::translate("MainWindow", "Trapezium ", 0));
+        btnSortNameASC->setText(QApplication::translate("MainWindow", "Name Ascending", 0));
+        tvFileName_3->setText(QApplication::translate("MainWindow", "Images:", 0));
+        btnSortNameDes->setText(QApplication::translate("MainWindow", " Name Decending", 0));
+        btnSortDateAcs->setText(QApplication::translate("MainWindow", " Date Ascending", 0));
+        btnSortDateDes->setText(QApplication::translate("MainWindow", "Date Decending", 0));
+        btnSortClassAcs->setText(QApplication::translate("MainWindow", "Name Ascendng ", 0));
+        btnSortClassDec->setText(QApplication::translate("MainWindow", "Name Decending ", 0));
+        lSortClasses->setText(QApplication::translate("MainWindow", "Sort:", 0));
+        lSortImages->setText(QApplication::translate("MainWindow", "Sort:", 0));
+        lShapes->setText(QApplication::translate("MainWindow", "Shapes:", 0));
+        btnDeleteShape->setText(QApplication::translate("MainWindow", "Delete Shape", 0));
+        label->setText(QApplication::translate("MainWindow", "1. Import the desired folder of images with the Images Button. ", 0));
+        label_2->setText(QApplication::translate("MainWindow", "2. Display the desired image by clicking on its name and then clicking the Dispay Button.  ", 0));
+        label_3->setText(QApplication::translate("MainWindow", "3. Import the desired folder of classes with the Classses button. Once imported, you can sort the files using availibe buttons.", 0));
+        label_4->setText(QApplication::translate("MainWindow", "4. Using the shape button draw the shapes on top of the images. Click and drag the centre of the shape to move.", 0));
+        label_5->setText(QApplication::translate("MainWindow", "5.Click the save button to create a new file. ", 0));
     } // retranslateUi
 
 };
